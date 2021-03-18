@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "UserPreference")
+@Table(name = "user_preference")
 public class UserPreference {
     @Column(name = "ID")
     @Id

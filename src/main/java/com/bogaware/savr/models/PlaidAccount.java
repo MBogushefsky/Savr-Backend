@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "PlaidAccount")
+@Table(name = "plaid_account")
 public class PlaidAccount {
     @Column(name = "ID")
     @Id

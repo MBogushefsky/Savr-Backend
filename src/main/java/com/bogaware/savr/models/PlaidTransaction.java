@@ -16,7 +16,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "PlaidTransaction")
+@Table(name = "plaid_transaction")
 public class PlaidTransaction {
     @Column(name = "ID")
     @Id

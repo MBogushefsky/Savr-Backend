@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TwilioMessage")
+@Table(name = "twilio_message")
 public class TwilioMessage {
     @Column(name = "ID")
     @Id
