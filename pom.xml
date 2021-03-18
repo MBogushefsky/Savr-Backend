@@ -7,7 +7,6 @@
     <groupId>com.bogaware</groupId>
     <artifactId>Savr</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
     <name>savr</name>
     <description>Save on the go</description>
     <properties>
