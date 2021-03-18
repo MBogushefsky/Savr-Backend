@@ -1,9 +1,0 @@
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/Application.java
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/models/Token.java
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/controllers/LoginController.java
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/controllers/AuthorizationController.java
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/controllers/TransactionController.java
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/repositories/TokenRepository.java
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/dto/AuthorizationDTO.java
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/services/PlaidService.java
-/Users/mitchell/IdeaProjects/Savr/src/main/java/com/bogaware/savr/configurations/PlaidConfiguration.java
