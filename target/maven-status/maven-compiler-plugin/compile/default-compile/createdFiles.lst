@@ -1,9 +1,0 @@
-com/bogaware/savr/configurations/PlaidConfiguration.class
-com/bogaware/savr/models/Token.class
-com/bogaware/savr/controllers/AuthorizationController.class
-com/bogaware/savr/controllers/TransactionController.class
-com/bogaware/savr/dto/AuthorizationDTO.class
-com/bogaware/savr/Application.class
-com/bogaware/savr/repositories/TokenRepository.class
-com/bogaware/savr/controllers/LoginController.class
-com/bogaware/savr/services/PlaidService.class
