@@ -1,7 +1,10 @@
 package com.bogaware.savr.controllers;
 
+import com.bogaware.savr.dto.UserDTO;
 import com.bogaware.savr.models.User;
 import com.bogaware.savr.repositories.UserRepository;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -17,10 +20,10 @@ public class LoginController {
 
     @GetMapping("")
     @ResponseBody
-    public User login(@RequestParam(name = "username") String username, @RequestParam(name = "passwordHash") String passwordHash) {
+    public UserDTO login(@RequestParam(name = "username") String username, @RequestParam(name = "passwordHash") String passwordHash) {
         User retrievedUser = userRepository.findByUsernameAndPasswordHash(username, passwordHash);
         if (retrievedUser != null) {
-            return retrievedUser;
+            return retrievedUser.getDTO();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }

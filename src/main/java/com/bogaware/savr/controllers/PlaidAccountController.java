@@ -6,7 +6,9 @@ import com.bogaware.savr.models.User;
 import com.bogaware.savr.repositories.PlaidAccountRepository;
 import com.bogaware.savr.repositories.PlaidTokenRepository;
 import com.bogaware.savr.repositories.UserRepository;
+import com.bogaware.savr.services.PlaidAccountSyncService;
 import com.bogaware.savr.services.PlaidService;
+import com.bogaware.savr.services.PlaidTransactionSyncService;
 import com.bogaware.savr.services.UserAuthorizationService;
 import com.plaid.client.response.AccountsBalanceGetResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,6 @@ public class PlaidAccountController {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    PlaidTokenRepository plaidTokenRepository;
 
     @Autowired
     PlaidAccountRepository plaidAccountRepository;

@@ -15,13 +15,15 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user_preference")
-public class UserPreference {
-    @Column(name = "TypeID")
+@Table(name = "user_preference_type")
+public class UserPreferenceType {
+    @Column(name = "ID")
     @Id
-    private String typeId;
-    @Column(name = "UserID")
-    private String userId;
-    @Column(name = "Value")
-    private String value;
+    private String Id;
+    @Column(name = "DataType")
+    private String dataType;
+    @Column(name = "Category")
+    private String category;
+    @Column(name = "Name")
+    private String name;
 }
