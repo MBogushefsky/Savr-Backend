@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface PlaidAccountRepository extends JpaRepository<PlaidAccount, String> {
-    @Query(value = "SELECT pa FROM PlaidAccount pa WHERE UserID=:userId")
+    @Query(value = "SELECT pa FROM PlaidAccount pa WHERE UserID = :userId")
     List<PlaidAccount> findAllByUserId(@Param("userId") String userId);
 
-    @Query(value = "SELECT pa FROM PlaidAccount pa WHERE AccountID=:accountId")
+    @Query(value = "SELECT pa FROM PlaidAccount pa WHERE AccountID = :accountId")
     PlaidAccount findByAccountId(@Param("accountId") String accountId);
 }

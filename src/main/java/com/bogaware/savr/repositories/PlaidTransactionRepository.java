@@ -2,9 +2,11 @@ package com.bogaware.savr.repositories;
 
 import com.bogaware.savr.models.PlaidTransaction;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.util.List;
@@ -26,9 +28,9 @@ public interface PlaidTransactionRepository extends JpaRepository<PlaidTransacti
     @Query(value = "SELECT pt FROM PlaidTransaction pt \n" +
             "WHERE UserID = :userId \n" +
             "AND AccountID = :accountId \n" +
-            "AND Amount = :amount \n" +
             "AND MerchantName = :merchantName \n" +
             "AND Name = :name \n" +
+            "AND Amount = :amount \n" +
             "AND Date = :date \n" +
             "ORDER BY Date DESC")
     List<PlaidTransaction> findAllByContent(@Param("userId") String userId,
@@ -37,4 +39,9 @@ public interface PlaidTransactionRepository extends JpaRepository<PlaidTransacti
                                             @Param("merchantName") String merchantName,
                                             @Param("name") String name,
                                             @Param("date") Date date);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM plaid_transaction WHERE AccountID = :accountId", nativeQuery = true)
+    void deleteAllByAccountId(@Param("accountId") String accountId);
 }

@@ -17,13 +17,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_preference")
 public class UserPreference {
-    @Column(name = "ID")
+    @Column(name = "TypeID")
     @Id
-    private String Id;
+    private String typeId;
     @Column(name = "UserID")
     private String userId;
-    @Column(name = "Preference")
-    private String preference;
     @Column(name = "Value")
-    private boolean value;
+    private String value;
 }

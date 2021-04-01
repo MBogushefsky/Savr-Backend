@@ -24,6 +24,8 @@ public class PlaidAccount {
     private String userId;
     @Column(name = "AccountID")
     private String accountId;
+    @Column(name = "InstitutionID")
+    private String institutionId;
     @Column(name = "Name")
     private String name;
     @Column(name = "Type")
@@ -38,6 +40,7 @@ public class PlaidAccount {
     public void setContents(PlaidAccount plaidAccount) {
         this.setUserId(plaidAccount.getUserId());
         this.setAccountId(plaidAccount.getAccountId());
+        this.setInstitutionId(plaidAccount.getInstitutionId());
         this.setName(plaidAccount.getName());
         this.setType(plaidAccount.getType());
         this.setSubType(plaidAccount.getSubType());

@@ -1,9 +1,12 @@
 package com.bogaware.savr.models;
 
+import com.bogaware.savr.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,4 +35,22 @@ public class User {
     private String email;
     @Column(name = "PhoneNumber")
     private String phoneNumber;
+    @Column(name = "ProfileImage")
+    private byte[] profileImage;
+
+    public UserDTO getDTO() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(this.getId());
+        userDTO.setUsername(this.getUsername());
+        userDTO.setPasswordHash(this.getPasswordHash());
+        userDTO.setFirstName(this.getFirstName());
+        userDTO.setLastName(this.getLastName());
+        userDTO.setEmail(this.getEmail());
+        userDTO.setPhoneNumber(this.getPhoneNumber());
+        StringBuilder profileImageStringBuilder = new StringBuilder();
+        profileImageStringBuilder.append("data:image/png;base64,");
+        profileImageStringBuilder.append(StringUtils.newStringUtf8(Base64.encodeBase64(this.getProfileImage(), false)));
+        userDTO.setProfileImage(profileImageStringBuilder.toString());
+        return userDTO;
+    }
 }

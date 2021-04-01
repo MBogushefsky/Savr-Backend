@@ -39,17 +39,20 @@ public class PlaidAccountSyncService {
     }
 
     @Async
-    @Scheduled(fixedDelay = 900000, initialDelay = 900000) //Every 15 minutes
+    @Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
     @Transactional
     public void syncAll() {
         System.out.println("Syncing All Accounts...");
         List<PlaidToken> plaidTokens = plaidTokenRepository.findAll();
         for (PlaidToken plaidToken: plaidTokens) {
-            List<Account> accounts = plaidService.getAccounts(plaidToken.getAccessToken()).getAccounts();
+            AccountsGetResponse accountsGetResponse = plaidService.getAccounts(plaidToken.getAccessToken());
+            List<Account> accounts = accountsGetResponse.getAccounts();
+            String institutionId = accountsGetResponse.getItem().getInstitutionId();
             List<PlaidAccount> plaidAccounts = accounts.stream().map(account ->
                     new PlaidAccount(java.util.UUID.randomUUID().toString().toUpperCase(),
                             plaidToken.getUserId(),
                             account.getAccountId(),
+                            institutionId,
                             account.getOfficialName() != null ? account.getOfficialName() : account.getName(),
                             account.getType(),
                             account.getSubtype(),

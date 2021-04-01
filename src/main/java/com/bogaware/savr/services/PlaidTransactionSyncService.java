@@ -6,6 +6,7 @@ import com.bogaware.savr.models.User;
 import com.bogaware.savr.repositories.PlaidTokenRepository;
 import com.bogaware.savr.repositories.PlaidTransactionRepository;
 import com.bogaware.savr.repositories.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plaid.client.response.TransactionsGetResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -26,6 +27,8 @@ public class PlaidTransactionSyncService {
     private TwilioService twilioService;
     private UserRepository userRepository;
 
+    private ObjectMapper objectMapper;
+
     @Autowired
     public PlaidTransactionSyncService(PlaidService plaidService,
                                        PlaidTransactionRepository plaidTransactionRepository,
@@ -37,16 +40,22 @@ public class PlaidTransactionSyncService {
         this.plaidTokenRepository = plaidTokenRepository;
         this.twilioService = twilioService;
         this.userRepository = userRepository;
+        this.objectMapper = new ObjectMapper();
     }
 
     @Async
-    @Scheduled(fixedDelay = 900000, initialDelay = 900000) //Every 15 minutes
+    @Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
     @Transactional
-    public void syncAll() throws Exception {
+    protected void syncAll() throws Exception {
         System.out.println("Syncing All Transactions...");
+        syncAllWithOptions(true);
+        System.out.println("All Transactions Synced");
+    }
+
+    public void syncAllWithOptions(boolean sendMessage) {
         List<PlaidToken> plaidTokens = plaidTokenRepository.findAll();
         Calendar startDate = Calendar.getInstance();
-        startDate.add(Calendar.DAY_OF_MONTH, -2);
+        startDate.add(Calendar.DAY_OF_MONTH, -30);
         Calendar endDate = Calendar.getInstance();
         for (PlaidToken plaidToken: plaidTokens) {
             List<TransactionsGetResponse.Transaction> transactions = plaidService.getTransactions(plaidToken.getAccessToken(), startDate, endDate).getTransactions();
@@ -55,30 +64,30 @@ public class PlaidTransactionSyncService {
                             plaidToken.getUserId(),
                             transaction.getAccountId(),
                             transaction.getTransactionId(),
-                            transaction.getAmount() * -1,
                             transaction.getMerchantName(),
                             transaction.getName(),
+                            objectMapper.valueToTree(transaction.getCategory()).toString(),
+                            transaction.getAmount() * -1,
                             Date.valueOf(transaction.getDate()))
             ).collect(Collectors.toList());
-            analysis(plaidToken.getUserId(), plaidTransactions);
+            analysis(plaidToken.getUserId(), plaidTransactions, sendMessage);
             saveOrUpdate(plaidTransactions);
         }
-        System.out.println("All Transactions Synced");
     }
 
-    public void analysis(String userId, List<PlaidTransaction> updatedPlaidTransactions) {
+    public void analysis(String userId, List<PlaidTransaction> updatedPlaidTransactions, boolean sendMessage) {
         List<PlaidTransaction> oldPlaidTransactions = plaidTransactionRepository.findAllByUserId(userId);
         List<PlaidTransaction> newPlaidTransactions = updatedPlaidTransactions.stream()
                 .filter(plaidTransaction -> {
                     boolean foundTransaction = false;
                     for (PlaidTransaction oldPlaidTransaction: oldPlaidTransactions) {
-                        if (plaidTransaction.getTransactionId().equals(oldPlaidTransaction.getTransactionId())) {
+                        if (plaidTransaction.getTransactionId().equalsIgnoreCase(oldPlaidTransaction.getTransactionId())) {
                             foundTransaction = true;
                         }
                     }
                     return !foundTransaction;
                 }).collect(Collectors.toList());
-        if (newPlaidTransactions.size() > 0) {
+        if (sendMessage && newPlaidTransactions.size() > 0) {
             User userToSendMessage = userRepository.findById(userId).get();
             twilioService.sendNewTransactionsUpdate(userToSendMessage.getPhoneNumber(), newPlaidTransactions);
         }

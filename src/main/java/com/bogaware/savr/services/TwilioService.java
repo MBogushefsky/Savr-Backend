@@ -39,6 +39,15 @@ public class TwilioService {
         this.commandService = commandService;
     }
 
+    public TwilioMessage twilioMessageBuilder(String toPhoneNumber, String message) {
+        return new TwilioMessage(java.util.UUID.randomUUID().toString().toUpperCase(),
+                toPhoneNumber,
+                twilioConfiguration.getPhoneNumber(),
+                false,
+                message,
+                new java.sql.Timestamp(new java.util.Date().getTime()));
+    }
+
     public void sendMessage(TwilioMessage twilioMessage) {
         Message message = Message.creator(new PhoneNumber(twilioMessage.getToPhoneNumber()),
                 new PhoneNumber(twilioConfiguration.getPhoneNumber()),
