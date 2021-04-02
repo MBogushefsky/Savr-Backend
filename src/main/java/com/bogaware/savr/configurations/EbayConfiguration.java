@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,7 +25,8 @@ public class EbayConfiguration {
 
     @Bean
     public OAuth2Api getEbayOAuth() throws FileNotFoundException {
-        File configFile = new File(System.getProperty("user.dir") + "/src/main/resources/ebay-config.yml");
+        System.out.println("FILE: " + this.getClass().getClassLoader().getResource("ebay-config.yml").getPath());
+        File configFile = new File(this.getClass().getClassLoader().getResource("ebay-config.yml").getPath());
         CredentialUtil.load(new FileInputStream(configFile.getAbsoluteFile()));
         return new OAuth2Api();
     }
