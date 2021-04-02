@@ -33,7 +33,7 @@ public class EbayConfiguration extends HttpServlet {
     ServletContext context;
 
     @Bean
-    public OAuth2Api getEbayOAuth() throws FileNotFoundException, MalformedURLException, URISyntaxException {
+    public OAuth2Api getEbayOAuth() throws FileNotFoundException {
         File configFile = new File(context.getRealPath("/WEB-INF/classes/ebay-config.yml"));
         if (configFile.exists()) {
             CredentialUtil.load(new FileInputStream(configFile.getAbsoluteFile()));

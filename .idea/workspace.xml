@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e9162e3-b16a-4f83-a84a-e87cf4856e66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/configurations/EbayConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/configurations/EbayConfiguration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -320,11 +319,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/bogaware/savr/models/PlaidToken.java</url>
           <line>20</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/PlaidAccountSyncService.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/PlaidTransactionService.java</url>
