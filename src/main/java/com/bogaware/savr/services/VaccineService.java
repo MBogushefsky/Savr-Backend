@@ -17,10 +17,7 @@ import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -56,6 +53,7 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -64,6 +62,9 @@ public class VaccineService {
     private String userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjZmYzM0Y2YtODY3NS00MDE5LWE3NjQtNTBjNjU0NDE0ZjlmIiwibmFtZUlEIjoiMjZmYzM0Y2YtODY3NS00MDE5LWE3NjQtNTBjNjU0NDE0ZjlmIiwibmFtZUlERm9ybWF0IjoidXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOm5hbWVpZC1mb3JtYXQ6cGVyc2lzdGVudCIsInVzZXIiOnsiaWQiOjE5NTIxNjYsImNyZWF0ZWREYXRlIjoiMjAyMS0wMy0yM1QwMDoyOTowNS4yODNaIiwidXBkYXRlZERhdGUiOiIyMDIxLTAzLTI0VDAyOjIxOjUzLjE2OVoiLCJ2ZXJzaW9uIjozLCJjcmVhdGVkQnkiOjAsInVwZGF0ZWRCeSI6MCwidGl0bGUiOm51bGwsImZpcnN0TmFtZSI6Ik1pdGNoZWxsIiwibWlkZGxlTmFtZSI6bnVsbCwibGFzdE5hbWUiOiJCb2d1c2hlZnNreSIsImVtYWlsIjoibWJvZ3VzaGVmc2t5QGdtYWlsLmNvbSIsImZpcmViYXNlVXNlcklkIjpudWxsLCJldGhuaWNpdHkiOiJOb24gSGlzcGFuaWMvTGF0aW5vIiwiYWFkVXNlcklkIjoiMjZmYzM0Y2YtODY3NS00MDE5LWE3NjQtNTBjNjU0NDE0ZjlmIiwiZG9iIjoiMTk5NS0wMS0yNSIsImdlbmRlciI6Ik1hbGUiLCJndWFyZGlhbk5hbWUiOm51bGwsInByb2ZpbGUiOiJQYXRpZW50IiwicmFjZSI6IldoaXRlIiwibGFuZ3VhZ2VQcmVmZXJlbmNlIjoiZW4tVVMiLCJsYW5ndWFnZXNTcG9rZW4iOm51bGwsInByaW1hcnlQaG9uZU51bWJlciI6Iig0ODApIDg4OC01NDM2Iiwib3RoZXJQaG9uZU51bWJlciI6bnVsbCwiQWRkcmVzczEiOm51bGwsIkFkZHJlc3MyIjoiMzI0MyBFIENlZGFyd29vZCBMbiIsInN0cmVldCI6bnVsbCwic3RhdGUiOiJBWiIsImNpdHkiOiJQaG9lbml4IiwiY291bnRyeSI6bnVsbCwiemlwY29kZSI6Ijg1MDQ4IiwibWFyaXRhbFN0YXR1cyI6IlNpbmdsZSIsImNvdW50eSI6Ik1hcmljb3BhIiwiZ3VhcmRpYW5GaXJzdE5hbWUiOiIiLCJndWFyZGlhbkxhc3ROYW1lIjoiIiwiaGF2ZUluc3VyYW5jZSI6ZmFsc2UsInNtc0NvbnNlbnQiOnRydWUsImlzRGlzYWJsZWQiOmZhbHNlLCJvY2N1cGF0aW9uIjoiT3RoZXIgb2NjdXBhdGlvbiIsIm91IjpudWxsfSwiaWF0IjoxNjE3MTY0MTc2LCJleHAiOjE2MTcxNjUwNzZ9.ecVCrH2Ijmw5aEbDrxGjG8vdFoygY4lmwh8cgk-vOVY";
     private boolean gettingNewToken = false;
     private boolean isTokenInvalid = true;
+    private boolean isAvailableAppointment = false;
+    private boolean loggedIn = false;
+    private boolean selectedAppointment = false;
 
     private int attemptCounter = 0;
 
@@ -71,7 +72,7 @@ public class VaccineService {
     private int monthNum = 4;
     private int dayOfMonth = 1;
     private String searchDate = "Fri%20Apr%2030%202021%2016:46:34%20GMT-0700";
-    private int[] eventIds = new int[] { 838, 1143, 368 };
+    private int[] eventIds = new int[] { 838, 1147 };//, 368 };
 
     private HttpClient client = HttpClients.custom()
             .setSSLSocketFactory(new SSLConnectionSocketFactory(SSLContexts.custom()
@@ -85,6 +86,9 @@ public class VaccineService {
     ObjectMapper objectMapper = new ObjectMapper();
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
+    WebDriver browser;
+    WebDriverWait wait;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -92,14 +96,15 @@ public class VaccineService {
     }
 
     //@Scheduled(fixedDelay = 1)
-    public void getVaccineAppointment() throws IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, ParseException {
+    public void getVaccineAppointment() throws IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, ParseException, InterruptedException {
 
         if (isTokenInvalid && !gettingNewToken) {
+            loggedIn = false;
             gettingNewToken = true;
             String loginUrl = getLoginUrl();
             if (loginUrl != null) {
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
-                WebDriver browser = new ChromeDriver();
+                browser = new ChromeDriver();
                 browser.get(loginUrl);
                 browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 WebElement usernameInput = browser.findElement(By.id("signInName"));
@@ -111,12 +116,24 @@ public class VaccineService {
                 WebElement body = browser.findElement(By.cssSelector("body"));
                 //System.out.println("BODY: " + body.getAttribute("innerHTML"));
                 JavascriptExecutor js = ((JavascriptExecutor) browser);
-                WebDriverWait wait = new WebDriverWait(browser, 50);
+                wait = new WebDriverWait(browser, 20);
                 //wait.until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
                 WebElement we = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".home-action")));
                 userToken = (String) js.executeScript(String.format("return window.localStorage.getItem('%s');", "TOKEN"));
                 System.out.println("TOKEN: " + userToken);
-                browser.close();
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".feature-buttons.resc .text")));
+                List<WebElement> buttonsOnHome = browser.findElements(By.cssSelector(".feature-buttons.resc .text"));
+                for (WebElement button : buttonsOnHome) {
+                    System.out.println("INNER TEXT: " + button.getAttribute("innerText"));
+                    if (button.getAttribute("innerText").contains("Reschedule Appointment")) {
+                        button.click();
+                    }
+                }
+                loggedIn = true;
+                /*if (isAvailableAppointment) {
+                    WebElement radioButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".mat-radio-button .mat-radio-label .mat-radio-container input")));
+                    System.out.println(radioButton.getAttribute("value"));
+                }*/
                 isTokenInvalid = false;
             }
             gettingNewToken = false;
@@ -132,9 +149,69 @@ public class VaccineService {
         if (attemptCounter > 10000) {
             System.exit(1);
         }
-        getEarliestVaccineAppointmentSlot();
-        callCounter++;
-        System.out.println("Checked (Call " + callCounter + ") (" + attemptCounter + " Failed on Slot Full)");
+        if (!selectedAppointment) {
+            getEarliestVaccineAppointmentSlot();
+            callCounter++;
+            System.out.println("Checked (Call " + callCounter + ") (" + attemptCounter + " Failed on Slot Full)");
+        }
+    }
+
+    //@Scheduled(fixedDelay = 1000)
+    private void checkForAppointments() throws InterruptedException {
+        if (!isAvailableAppointment || !loggedIn || selectedAppointment) {
+            return;
+        }
+        selectedAppointment = true;
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".fieldbox[formcontrolname='zipCode']")));
+        WebElement inputZip = browser.findElement(By.cssSelector(".fieldbox[formcontrolname='zipCode']"));
+        inputZip.clear();
+        inputZip.sendKeys("85296");
+        System.out.println("1");
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loader-md")));
+        WebElement timeSlot = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".time-card .dropdownbox:not(.hidden)")));
+        timeSlot.click();
+        System.out.println("2");
+        System.out.println("TIME SLOT: " + timeSlot.getAttribute("innerHTML"));
+        WebElement bodyEle = browser.findElement(By.cssSelector("body"));
+        System.out.println("Body: " + bodyEle.getAttribute("innerHTML"));
+        WebElement timeSlotRadio = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".mob-table-hor table mat-radio-button")));
+        timeSlotRadio.click();
+        System.out.println("3");
+        Thread.sleep(500);
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".mat-spinner")));
+        System.out.println("4");
+        JavascriptExecutor jse = (JavascriptExecutor)browser;
+        Thread.sleep(1500);
+        System.out.println("5");
+        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        WebElement bookAppointmentButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".button-wrapper .next-button")));
+        bookAppointmentButton.click();
+        System.out.println("6");
+        //jse.executeScript("arguments[0].click();", bookAppointmentButton);
+        WebElement confirmBookButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("mat-dialog-container button.proceed")));
+        confirmBookButton.click();
+    }
+
+    public static ExpectedCondition<Boolean> absenceOfElementLocated(
+            final By locator) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    driver.findElement(locator);
+                    return false;
+                } catch (NoSuchElementException e) {
+                    return true;
+                } catch (StaleElementReferenceException e) {
+                    return true;
+                }
+            }
+
+            @Override
+            public String toString() {
+                return "element to not being present: " + locator;
+            }
+        };
     }
 
     private String getLoginUrl() throws IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
@@ -159,7 +236,7 @@ public class VaccineService {
         return null;
     }
 
-    private void getEarliestVaccineAppointmentSlot() throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+    private void getEarliestVaccineAppointmentSlot() throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, InterruptedException {
         long startTime = Calendar.getInstance().getTime().getTime();
         trustEveryone();
         HttpGet request = new HttpGet("https://api-server-podvaccine.azdhs.gov/vaccination-event/patient-view?distance=50&zipCode=85296&date=2021-04-01&groupIds=1&priorityString=Adults_16_older,Adults_18_older,Adults_20_older,Adults_25_older&user=1952166");
@@ -251,6 +328,10 @@ public class VaccineService {
             System.out.println("Found: " + appendLine2);
             if (objectMapper.readTree(appendLine2).get("message").asText().equalsIgnoreCase("SLOT_FULL")) {
                 attemptCounter++;
+                if (isAvailableAppointment == false) {
+                    isAvailableAppointment = true;
+                    checkForAppointments();
+                }
                 System.out.println("Missed: " + (Calendar.getInstance().getTime().getTime() - startTime) +" millisecond operation) ");
                 return;
             }
