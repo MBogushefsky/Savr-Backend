@@ -24,7 +24,7 @@ public class EbayConfiguration {
 
     @Bean
     public OAuth2Api getEbayOAuth() throws FileNotFoundException {
-        File configFile = new File("src/main/resources/ebay-config.yml");
+        File configFile = new File(System.getProperty("user.dir") + "/src/main/resources/ebay-config.yml");
         CredentialUtil.load(new FileInputStream(configFile.getAbsoluteFile()));
         return new OAuth2Api();
     }
