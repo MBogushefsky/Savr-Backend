@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/VaccineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/VaccineService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +59,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.Savr [spring-boot:run...]">
+  <component name="RunManager" selected="Maven.Savr [clean,install]">
     <configuration name="Application Start" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.bogaware.savr.Application" />
       <module name="Savr" />
@@ -164,7 +163,7 @@
       <screen x="0" y="23" width="1440" height="814" />
     </state>
     <state x="458" y="182" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.814@0.23.1440.814" timestamp="1616398201858" />
-    <state width="1398" height="198" key="GridCell.Tab.0.bottom" timestamp="1617344106749">
+    <state width="1398" height="198" key="GridCell.Tab.0.bottom" timestamp="1617347410301">
       <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.806@0.23.1440.806" timestamp="1616384084049" />
@@ -184,9 +183,9 @@
     <state width="1398" height="206" key="GridCell.Tab.0.bottom/0.23.1440.826@0.23.1440.826" timestamp="1616093591469" />
     <state width="1398" height="206" key="GridCell.Tab.0.bottom/0.23.1440.827@0.23.1440.827" timestamp="1616034156691" />
     <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.831@0.23.1440.831" timestamp="1617328834436" />
-    <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.832@0.23.1440.832" timestamp="1617344106749" />
+    <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.832@0.23.1440.832" timestamp="1617347410301" />
     <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.833@0.23.1440.833" timestamp="1617322814197" />
-    <state width="1398" height="198" key="GridCell.Tab.0.center" timestamp="1617344106748">
+    <state width="1398" height="198" key="GridCell.Tab.0.center" timestamp="1617347410300">
       <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.806@0.23.1440.806" timestamp="1616384084048" />
@@ -206,9 +205,9 @@
     <state width="1398" height="206" key="GridCell.Tab.0.center/0.23.1440.826@0.23.1440.826" timestamp="1616093591469" />
     <state width="1398" height="206" key="GridCell.Tab.0.center/0.23.1440.827@0.23.1440.827" timestamp="1616034156690" />
     <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.831@0.23.1440.831" timestamp="1617328834436" />
-    <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.832@0.23.1440.832" timestamp="1617344106748" />
+    <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.832@0.23.1440.832" timestamp="1617347410300" />
     <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.833@0.23.1440.833" timestamp="1617322814196" />
-    <state width="1398" height="198" key="GridCell.Tab.0.left" timestamp="1617344106747">
+    <state width="1398" height="198" key="GridCell.Tab.0.left" timestamp="1617347410300">
       <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.806@0.23.1440.806" timestamp="1616384084048" />
@@ -228,9 +227,9 @@
     <state width="1398" height="206" key="GridCell.Tab.0.left/0.23.1440.826@0.23.1440.826" timestamp="1616093591468" />
     <state width="1398" height="206" key="GridCell.Tab.0.left/0.23.1440.827@0.23.1440.827" timestamp="1616034156690" />
     <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.831@0.23.1440.831" timestamp="1617328834435" />
-    <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.832@0.23.1440.832" timestamp="1617344106747" />
+    <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.832@0.23.1440.832" timestamp="1617347410300" />
     <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.833@0.23.1440.833" timestamp="1617322814195" />
-    <state width="1398" height="198" key="GridCell.Tab.0.right" timestamp="1617344106748">
+    <state width="1398" height="198" key="GridCell.Tab.0.right" timestamp="1617347410301">
       <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state width="1398" height="198" key="GridCell.Tab.0.right/0.23.1440.806@0.23.1440.806" timestamp="1616384084049" />
@@ -250,7 +249,7 @@
     <state width="1398" height="206" key="GridCell.Tab.0.right/0.23.1440.826@0.23.1440.826" timestamp="1616093591469" />
     <state width="1398" height="206" key="GridCell.Tab.0.right/0.23.1440.827@0.23.1440.827" timestamp="1616034156691" />
     <state width="1398" height="198" key="GridCell.Tab.0.right/0.23.1440.831@0.23.1440.831" timestamp="1617328834436" />
-    <state width="1398" height="198" key="GridCell.Tab.0.right/0.23.1440.832@0.23.1440.832" timestamp="1617344106748" />
+    <state width="1398" height="198" key="GridCell.Tab.0.right/0.23.1440.832@0.23.1440.832" timestamp="1617347410301" />
     <state width="1398" height="198" key="GridCell.Tab.0.right/0.23.1440.833@0.23.1440.833" timestamp="1617322814196" />
     <state width="1398" height="259" key="GridCell.Tab.1.bottom" timestamp="1616701751816">
       <screen x="0" y="23" width="1440" height="814" />
