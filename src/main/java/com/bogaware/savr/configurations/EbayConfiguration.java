@@ -5,11 +5,15 @@ import com.ebay.api.client.auth.oauth2.OAuth2Api;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,15 +23,23 @@ import java.io.FileNotFoundException;
 @Setter
 @NoArgsConstructor
 @ConfigurationProperties("ebay")
-public class EbayConfiguration {
+public class EbayConfiguration extends HttpServlet {
 
     private String apiHost;
 
+    @Autowired
+    ServletContext context;
+
     @Bean
     public OAuth2Api getEbayOAuth() throws FileNotFoundException {
-        System.out.println("FILE: " + this.getClass().getClassLoader().getResource("ebay-config.yml").getPath());
-        File configFile = new File(this.getClass().getClassLoader().getResource("ebay-config.yml").getPath());
-        CredentialUtil.load(new FileInputStream(configFile.getAbsoluteFile()));
+        File configFile = new File(context.getRealPath("ebay-config.yml"));
+        if (configFile.exists()) {
+            CredentialUtil.load(new FileInputStream(configFile.getAbsoluteFile()));
+        }
+        else {
+            configFile = new File("src/main/resources/ebay-config.yml");
+            CredentialUtil.load(new FileInputStream(configFile));
+        }
         return new OAuth2Api();
     }
 }
