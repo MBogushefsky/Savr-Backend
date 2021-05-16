@@ -1,0 +1,74 @@
+package com.bogaware.savr.services.bank;
+
+import com.bogaware.savr.models.bank.PlaidAccount;
+import com.bogaware.savr.models.bank.PlaidToken;
+import com.bogaware.savr.repositories.bank.PlaidAccountRepository;
+import com.bogaware.savr.repositories.bank.PlaidTokenRepository;
+import com.plaid.client.response.Account;
+import com.plaid.client.response.AccountsGetResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class PlaidAccountSyncService {
+
+    private PlaidService plaidService;
+    private PlaidAccountRepository plaidAccountRepository;
+    private PlaidTokenRepository plaidTokenRepository;
+
+    @Autowired
+    public PlaidAccountSyncService(PlaidService plaidService,
+                                   PlaidAccountRepository plaidAccountRepository,
+                                   PlaidTokenRepository plaidTokenRepository) {
+        this.plaidService = plaidService;
+        this.plaidAccountRepository = plaidAccountRepository;
+        this.plaidTokenRepository = plaidTokenRepository;
+    }
+
+    @Async
+    @Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
+    @Transactional
+    public void syncAll() {
+        System.out.println("Syncing All Accounts...");
+        List<PlaidToken> plaidTokens = plaidTokenRepository.findAll();
+        for (PlaidToken plaidToken: plaidTokens) {
+            AccountsGetResponse accountsGetResponse = plaidService.getAccounts(plaidToken.getAccessToken());
+            List<Account> accounts = accountsGetResponse.getAccounts();
+            String institutionId = accountsGetResponse.getItem().getInstitutionId();
+            List<PlaidAccount> plaidAccounts = accounts.stream().map(account ->
+                    new PlaidAccount(java.util.UUID.randomUUID().toString().toUpperCase(),
+                            plaidToken.getUserId(),
+                            account.getAccountId(),
+                            institutionId,
+                            account.getOfficialName() != null ? account.getOfficialName() : account.getName(),
+                            account.getType(),
+                            account.getSubtype(),
+                            account.getBalances().getAvailable(),
+                            account.getBalances().getCurrent())
+            ).collect(Collectors.toList());
+            saveOrUpdate(plaidAccounts);
+        }
+        System.out.println("All Accounts Synced");
+    }
+
+    @Transactional
+    public void saveOrUpdate(List<PlaidAccount> plaidAccounts) {
+        for (PlaidAccount plaidAccount: plaidAccounts) {
+            PlaidAccount foundPlaidTransaction = plaidAccountRepository
+                    .findByAccountId(plaidAccount.getAccountId());
+            if (foundPlaidTransaction != null) {
+                foundPlaidTransaction.setContents(plaidAccount);
+                plaidAccountRepository.save(foundPlaidTransaction);
+            }
+            else {
+                plaidAccountRepository.save(plaidAccount);
+            }
+        }
+    }
+}
