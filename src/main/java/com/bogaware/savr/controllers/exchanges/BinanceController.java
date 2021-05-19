@@ -1,7 +1,7 @@
-package com.bogaware.savr.controllers.investing;
+package com.bogaware.savr.controllers.exchanges;
 
-import com.bogaware.savr.models.investing.BinanceBalance;
-import com.bogaware.savr.services.investing.BinanceService;
+import com.bogaware.savr.models.exchanges.BinanceBalance;
+import com.bogaware.savr.services.exchanges.BinanceService;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

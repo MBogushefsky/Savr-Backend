@@ -28,12 +28,14 @@ public class ProfileController {
             String firstNameToSet = profileDTO.getFirstName();
             String lastNameToSet = profileDTO.getLastName();
             String emailToSet = profileDTO.getEmail();
-            if (firstNameToSet.isEmpty() || lastNameToSet.isEmpty() || emailToSet.isEmpty()) {
+            String phoneNumberToSet = profileDTO.getPhoneNumber();
+            if (firstNameToSet.isEmpty() || lastNameToSet.isEmpty() || emailToSet.isEmpty() || phoneNumberToSet.isEmpty()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot have an empty profile field");
             }
             currentUser.setFirstName(firstNameToSet);
             currentUser.setLastName(lastNameToSet);
             currentUser.setEmail(emailToSet);
+            currentUser.setPhoneNumber(phoneNumberToSet);
 
             User savedUser = userRepository.save(currentUser);
             return savedUser.getDTO();

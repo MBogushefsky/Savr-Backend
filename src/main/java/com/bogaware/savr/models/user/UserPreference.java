@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Time;
 
 @Getter
 @Setter
@@ -22,6 +23,8 @@ public class UserPreference {
     private String typeId;
     @Column(name = "UserID")
     private String userId;
+    @Column(name = "PreferredTime")
+    private Time preferredTime;
     @Column(name = "Value")
     private String value;
 }

@@ -1,26 +1,20 @@
-package com.bogaware.savr.dto.user;
+package com.bogaware.savr.dto.exchanges;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.sql.Time;
 
 @Getter
 @Setter
 @JsonSerialize
 @AllArgsConstructor
-@NoArgsConstructor
-public class ChangeUserPreferenceDTO {
+public class SymbolSearchResultDTO {
     @JsonProperty
-    private String typeId;
+    private final String name;
     @JsonProperty
-    private String userId;
+    private final String symbol;
     @JsonProperty
-    private Time preferredTime;
-    @JsonProperty
-    private String value;
+    private final boolean isStock;
 }
