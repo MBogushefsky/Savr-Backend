@@ -1,7 +1,7 @@
-package com.bogaware.savr.services.investing;
+package com.bogaware.savr.services.exchanges;
 
-import com.bogaware.savr.configurations.investing.BinanceAlertConfiguration;
-import com.bogaware.savr.models.investing.BinanceBalance;
+import com.bogaware.savr.configurations.exchanges.BinanceAlertConfiguration;
+import com.bogaware.savr.models.exchanges.BinanceBalance;
 import com.bogaware.savr.services.user.TwilioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;

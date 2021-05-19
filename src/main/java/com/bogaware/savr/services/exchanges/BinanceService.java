@@ -1,7 +1,7 @@
-package com.bogaware.savr.services.investing;
+package com.bogaware.savr.services.exchanges;
 
-import com.bogaware.savr.configurations.investing.BinanceConfiguration;
-import com.bogaware.savr.models.investing.BinanceBalance;
+import com.bogaware.savr.configurations.exchanges.BinanceConfiguration;
+import com.bogaware.savr.models.exchanges.BinanceBalance;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;

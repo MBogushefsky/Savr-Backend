@@ -1,7 +1,6 @@
 package com.bogaware.savr.controllers.bank;
 
 import com.bogaware.savr.dto.bank.PlaidTransactionDTO;
-import com.bogaware.savr.models.bank.PlaidTransaction;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.repositories.bank.PlaidTokenRepository;
 import com.bogaware.savr.repositories.bank.PlaidTransactionRepository;
@@ -9,7 +8,6 @@ import com.bogaware.savr.repositories.user.UserRepository;
 import com.bogaware.savr.services.bank.PlaidTransactionService;
 import com.bogaware.savr.services.bank.PlaidTransactionSyncService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -17,11 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
-@RequestMapping("/transactions")
-public class PlaidTransactionController {
+@RequestMapping("/statistics")
+public class BankAccountStatisticsController {
 
     @Autowired
     private UserRepository userRepository;
@@ -56,9 +55,9 @@ public class PlaidTransactionController {
     @ResponseBody
     public List<PlaidTransactionDTO> getTransactionsByAccountIdInTimeRangeUngrouped(@RequestHeader("Authorization") String userId,
                                                                                                   @RequestParam("accountIds") List<String> accountIds,
-                                                                                                  @RequestParam(value = "start-date", required = false)
+                                                                                                  @RequestParam(value = "startDate", required = false)
                                                                                                           Date startDate,
-                                                                                                  @RequestParam(value = "end-date", required = false)
+                                                                                                  @RequestParam(value = "endDate", required = false)
                                                                                                           Date endDate) {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {
@@ -74,9 +73,9 @@ public class PlaidTransactionController {
     @ResponseBody
     public ArrayList<ArrayList<PlaidTransactionDTO>> getTransactionsByAccountIdInTimeRangeGrouped(@RequestHeader("Authorization") String userId,
                                                                                        @RequestParam("accountIds") List<String> accountIds,
-                                                                                       @RequestParam(value = "start-date", required = false)
+                                                                                       @RequestParam(value = "startDate", required = false)
                                                                                                Date startDate,
-                                                                                       @RequestParam(value = "end-date", required = false)
+                                                                                       @RequestParam(value = "endDate", required = false)
                                                                                                Date endDate) {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {

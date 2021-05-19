@@ -19,4 +19,6 @@ public class ProfileDTO {
     private String lastName;
     @JsonProperty
     private String email;
+    @JsonProperty
+    private String phoneNumber;
 }

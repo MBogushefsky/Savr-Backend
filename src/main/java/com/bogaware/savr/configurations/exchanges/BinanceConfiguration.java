@@ -1,4 +1,4 @@
-package com.bogaware.savr.configurations.investing;
+package com.bogaware.savr.configurations.exchanges;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

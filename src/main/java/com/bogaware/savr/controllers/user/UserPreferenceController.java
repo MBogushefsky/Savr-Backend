@@ -65,7 +65,8 @@ public class UserPreferenceController {
                 return this.userPreferenceRepository.save(foundUserPreference);
             }
             else {
-                UserPreference userPreferenceToAdd = new UserPreference(typeId, userId, changeUserPreferenceDTO.getValue());
+                UserPreference userPreferenceToAdd = new UserPreference(typeId, userId, changeUserPreferenceDTO.getPreferredTime(),
+                        changeUserPreferenceDTO.getValue());
                 return this.userPreferenceRepository.save(userPreferenceToAdd);
             }
         }
@@ -81,15 +82,18 @@ public class UserPreferenceController {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {
             for (ChangeUserPreferenceDTO changeUserPreferenceDTO : changeUserPreferenceDTOs) {
-                UserPreference foundUserPreference = this.userPreferenceRepository.findByUserIdAndType(userId, changeUserPreferenceDTO.getTypeId());
+                UserPreference foundUserPreference = this.userPreferenceRepository.findByUserIdAndType(userId,
+                        changeUserPreferenceDTO.getTypeId());
+                UserPreference userPreferenceToSave;
                 if (foundUserPreference != null) {
                     foundUserPreference.setValue(changeUserPreferenceDTO.getValue());
-                    this.userPreferenceRepository.save(foundUserPreference);
+                    userPreferenceToSave = foundUserPreference;
                 }
                 else {
-                    UserPreference userPreferenceToAdd = new UserPreference(changeUserPreferenceDTO.getTypeId(), userId, changeUserPreferenceDTO.getValue());
-                    this.userPreferenceRepository.save(userPreferenceToAdd);
+                    userPreferenceToSave = new UserPreference(changeUserPreferenceDTO.getTypeId(), userId,
+                            changeUserPreferenceDTO.getPreferredTime(), changeUserPreferenceDTO.getValue());
                 }
+                this.userPreferenceRepository.save(userPreferenceToSave);
             }
             return true;
         }

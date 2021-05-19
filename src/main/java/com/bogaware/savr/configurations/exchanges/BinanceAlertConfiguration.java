@@ -1,4 +1,4 @@
-package com.bogaware.savr.configurations.investing;
+package com.bogaware.savr.configurations.exchanges;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @NoArgsConstructor
-@ConfigurationProperties("market-stack")
-public class MarketStackConfiguration {
-    private String apiHost;
-    private String apiKey;
+@ConfigurationProperties("binance-alert")
+public class BinanceAlertConfiguration {
+    private double significantPriceChangePercent;
 }
