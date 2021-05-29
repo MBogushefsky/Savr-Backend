@@ -14,4 +14,7 @@ public interface PlaidAccountRepository extends JpaRepository<PlaidAccount, Stri
 
     @Query(value = "SELECT pa FROM PlaidAccount pa WHERE AccountID = :accountId")
     PlaidAccount findByAccountId(@Param("accountId") String accountId);
+
+    @Query(value = "SELECT pa FROM PlaidAccount pa WHERE AccountID = :accountId AND UserID = :userId")
+    PlaidAccount findByAccountIdAndUserId(@Param("accountId") String accountId, @Param("userId") String userId);
 }
