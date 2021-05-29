@@ -22,6 +22,9 @@ public interface PlaidTransactionRepository extends JpaRepository<PlaidTransacti
     @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE AccountID IN :accountIds ORDER BY Date DESC")
     List<PlaidTransaction> findAllByAccountIds(@Param("accountIds") List<String> accountIds);
 
+    @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE AccountID IN :accountIds AND MerchantName = :query ORDER BY Date DESC")
+    List<PlaidTransaction> searchAllByAccountIds(@Param("accountIds") List<String> accountIds, @Param("query") String query);
+
     @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE AccountID = :accountId AND Date > :startDate AND " +
             "Date <= :endDate ORDER BY Date DESC")
     List<PlaidTransaction> findAllByAccountIdInTimeRange(@Param("accountId") String accountId,
@@ -31,8 +34,15 @@ public interface PlaidTransactionRepository extends JpaRepository<PlaidTransacti
     @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE AccountID IN :accountIds AND Date > :startDate AND " +
             "Date <= :endDate ORDER BY Date DESC")
     List<PlaidTransaction> findAllByAccountIdsInTimeRange(@Param("accountIds") List<String> accountIds,
-                                                         @Param("startDate") Date startDate,
-                                                         @Param("endDate") Date endDate);
+                                                          @Param("startDate") Date startDate,
+                                                          @Param("endDate") Date endDate);
+
+    @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE AccountID IN :accountIds AND MerchantName = :query AND Date > :startDate AND " +
+            "Date <= :endDate ORDER BY Date DESC")
+    List<PlaidTransaction> searchAllByAccountIdsInTimeRange(@Param("accountIds") List<String> accountIds,
+                                                          @Param("query") String query,
+                                                          @Param("startDate") Date startDate,
+                                                          @Param("endDate") Date endDate);
 
     @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE TransactionID = :transactionId ORDER BY Date DESC")
     PlaidTransaction findByTransactionId(@Param("transactionId") String transactionId);

@@ -1,10 +1,12 @@
 package com.bogaware.savr.controllers.bank;
 
+import com.bogaware.savr.dto.bank.PlaidAccountDTO;
 import com.bogaware.savr.models.bank.PlaidAccount;
 import com.bogaware.savr.models.bank.PlaidTransaction;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.repositories.bank.PlaidAccountRepository;
 import com.bogaware.savr.repositories.user.UserRepository;
+import com.bogaware.savr.services.bank.PlaidAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,14 +24,14 @@ public class PlaidAccountController {
     UserRepository userRepository;
 
     @Autowired
-    PlaidAccountRepository plaidAccountRepository;
+    PlaidAccountService plaidAccountService;
 
     @GetMapping("")
     @ResponseBody
-    public List<PlaidAccount> getAccounts(@RequestHeader("Authorization") String userId) {
+    public List<PlaidAccountDTO> getAccounts(@RequestHeader("Authorization") String userId) {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {
-            return plaidAccountRepository.findAllByUserId(currentUser.getId());
+            return plaidAccountService.getAllAccounts(currentUser.getId());
         }
         else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
@@ -38,10 +40,10 @@ public class PlaidAccountController {
 
     @GetMapping("{id}")
     @ResponseBody
-    public PlaidAccount getAccountById(@RequestHeader("Authorization") String userId, @PathVariable("id") String id) {
+    public PlaidAccountDTO getAccountById(@RequestHeader("Authorization") String userId, @PathVariable("id") String id) {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {
-            return plaidAccountRepository.findByAccountId(id);
+            return plaidAccountService.getAccountsById(userId, id);
         }
         else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");

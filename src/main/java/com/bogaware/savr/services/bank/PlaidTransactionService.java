@@ -75,13 +75,26 @@ public class PlaidTransactionService {
     }
 
     public List<PlaidTransactionDTO> findAllByAccountIdInTimeRangeUngrouped(List<String> accountIds, Date startDate,
-                                                                                          Date endDate) {
+                                                                            Date endDate) {
         List<PlaidTransaction> transactions;
         if (startDate != null && endDate != null) {
             transactions = plaidTransactionRepository.findAllByAccountIdsInTimeRange(accountIds, startDate, endDate);
         }
         else {
             transactions = plaidTransactionRepository.findAllByAccountIds(accountIds);
+        }
+        List<PlaidTransactionDTO> transactionDTOs = convertTransactionsToDTOs(transactions);
+        return transactionDTOs;
+    }
+
+    public List<PlaidTransactionDTO> searchAllByAccountIdInTimeRange(List<String> accountIds, String query, Date startDate,
+                                                                            Date endDate) {
+        List<PlaidTransaction> transactions;
+        if (startDate != null && endDate != null) {
+            transactions = plaidTransactionRepository.searchAllByAccountIdsInTimeRange(accountIds, query, startDate, endDate);
+        }
+        else {
+            transactions = plaidTransactionRepository.searchAllByAccountIds(accountIds, query);
         }
         List<PlaidTransactionDTO> transactionDTOs = convertTransactionsToDTOs(transactions);
         return transactionDTOs;

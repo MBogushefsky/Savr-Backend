@@ -1,7 +1,6 @@
 package com.bogaware.savr.controllers.bank;
 
 import com.bogaware.savr.dto.bank.PlaidTransactionDTO;
-import com.bogaware.savr.models.bank.PlaidTransaction;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.repositories.bank.PlaidTokenRepository;
 import com.bogaware.savr.repositories.bank.PlaidTransactionRepository;
@@ -42,10 +41,21 @@ public class PlaidTransactionController {
 
     @GetMapping("")
     @ResponseBody
-    public List<PlaidTransactionDTO> getAllTransactions(@RequestHeader("Authorization") String userId) {
+    public List<PlaidTransactionDTO> getTransactions(@RequestHeader("Authorization") String userId,
+                                                     @RequestParam("accountIds") List<String> accountIds,
+                                                     @RequestParam("query") String query,
+                                                     @RequestParam(value = "start-date", required = false)
+                                                                             Date startDate,
+                                                     @RequestParam(value = "end-date", required = false)
+                                                                             Date endDate) {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {
-            return plaidTransactionService.findAllByUserId(userId);
+            if ((accountIds == null || accountIds.size() == 0) && query == null && startDate == null && endDate == null) {
+                return plaidTransactionService.findAllByUserId(userId);
+            }
+            else {
+                return plaidTransactionService.searchAllByAccountIdInTimeRange(accountIds, query, startDate, endDate);
+            }
         }
         else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
@@ -54,16 +64,16 @@ public class PlaidTransactionController {
 
     @GetMapping("ungrouped")
     @ResponseBody
-    public List<PlaidTransactionDTO> getTransactionsByAccountIdInTimeRangeUngrouped(@RequestHeader("Authorization") String userId,
-                                                                                                  @RequestParam("accountIds") List<String> accountIds,
-                                                                                                  @RequestParam(value = "start-date", required = false)
+    public List<PlaidTransactionDTO> getTransactionsByAccountIdsInTimeRangeUngrouped(@RequestHeader("Authorization") String userId,
+                                                                                    @RequestParam("accountIds") List<String> accountIds,
+                                                                                     @RequestParam(value = "start-date", required = false)
                                                                                                           Date startDate,
-                                                                                                  @RequestParam(value = "end-date", required = false)
+                                                                                     @RequestParam(value = "end-date", required = false)
                                                                                                           Date endDate) {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {
-            List<PlaidTransactionDTO> groupedTransactions = plaidTransactionService.findAllByAccountIdInTimeRangeUngrouped(accountIds, startDate, endDate);
-            return groupedTransactions;
+            List<PlaidTransactionDTO> ungroupedTransactions = plaidTransactionService.findAllByAccountIdInTimeRangeUngrouped(accountIds, startDate, endDate);
+            return ungroupedTransactions;
         }
         else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
@@ -72,16 +82,44 @@ public class PlaidTransactionController {
 
     @GetMapping("grouped")
     @ResponseBody
-    public ArrayList<ArrayList<PlaidTransactionDTO>> getTransactionsByAccountIdInTimeRangeGrouped(@RequestHeader("Authorization") String userId,
-                                                                                       @RequestParam("accountIds") List<String> accountIds,
-                                                                                       @RequestParam(value = "start-date", required = false)
-                                                                                               Date startDate,
-                                                                                       @RequestParam(value = "end-date", required = false)
-                                                                                               Date endDate) {
+    public ArrayList<ArrayList<PlaidTransactionDTO>> getTransactionsByAccountIdsInTimeRangeGrouped(@RequestHeader("Authorization") String userId,
+                                                                                                  @RequestParam("accountIds") List<String> accountIds,
+                                                                                                  @RequestParam(value = "start-date", required = false)
+                                                                                                          Date startDate,
+                                                                                                  @RequestParam(value = "end-date", required = false)
+                                                                                                          Date endDate) {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {
             ArrayList<ArrayList<PlaidTransactionDTO>> groupedTransactions = plaidTransactionService.findAllByAccountIdInTimeRangeGrouped(accountIds, startDate, endDate);
             return groupedTransactions;
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+    }
+
+    @GetMapping("categories")
+    @ResponseBody
+    public ObjectNode getCategoriesWithNetAmount(@RequestHeader("Authorization") String userId,
+                                                 @RequestParam("accountIds") List<String> accountIds,
+                                                 @RequestParam(value = "start-date", required = false) Date startDate,
+                                                 @RequestParam(value = "end-date", required = false) Date endDate) {
+        User currentUser = userRepository.findById(userId).get();
+        if (currentUser != null) {
+            List<PlaidTransactionDTO> ungroupedTransactions = plaidTransactionService.findAllByAccountIdInTimeRangeUngrouped(accountIds, startDate, endDate);
+            ObjectNode categoriesWithNetAmount = objectMapper.createObjectNode();
+            for (PlaidTransactionDTO transactionDTO : ungroupedTransactions) {
+                String categoryOfTransaction = transactionDTO.getCategories().size() > 0 ?
+                        transactionDTO.getCategories().get(0) : null;
+                if (categoriesWithNetAmount.get(categoryOfTransaction) != null) {
+                    categoriesWithNetAmount.put(categoryOfTransaction,
+                            categoriesWithNetAmount.get(categoryOfTransaction).asDouble() + transactionDTO.getAmount());
+                }
+                else {
+                    categoriesWithNetAmount.put(categoryOfTransaction, transactionDTO.getAmount());
+                }
+            }
+            return categoriesWithNetAmount;
         }
         else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
