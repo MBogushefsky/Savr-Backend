@@ -87,6 +87,19 @@ public class PlaidTransactionService {
         return transactionDTOs;
     }
 
+    public List<PlaidTransactionDTO> findAllByUserIdInTimeRange(String userId, Date startDate,
+                                                                     Date endDate) {
+        List<PlaidTransaction> transactions;
+        if (startDate != null && endDate != null) {
+            transactions = plaidTransactionRepository.findAllByUserIdInTimeRange(userId, startDate, endDate);
+        }
+        else {
+            transactions = plaidTransactionRepository.findAllByUserId(userId);
+        }
+        List<PlaidTransactionDTO> transactionDTOs = convertTransactionsToDTOs(transactions);
+        return transactionDTOs;
+    }
+
     public List<PlaidTransactionDTO> searchAllByAccountIdInTimeRange(List<String> accountIds, String query, Date startDate,
                                                                             Date endDate) {
         List<PlaidTransaction> transactions;

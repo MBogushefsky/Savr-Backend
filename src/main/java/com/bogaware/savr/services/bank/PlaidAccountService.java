@@ -34,7 +34,11 @@ public class PlaidAccountService {
         return convertAccountsToDTOs(plaidAccountRepository.findAllByUserId(userId));
     }
 
-    public PlaidAccountDTO getAccountsById(String userId, String accountId) {
+    public PlaidAccountDTO getAccountsById(String accountId) {
+        return convertAccountToDTO(plaidAccountRepository.findByAccountId(accountId));
+    }
+
+    public PlaidAccountDTO getAccountsByIdAndUserId(String userId, String accountId) {
         return convertAccountToDTO(plaidAccountRepository.findByAccountIdAndUserId(accountId, userId));
     }
 
