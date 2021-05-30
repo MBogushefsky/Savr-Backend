@@ -18,7 +18,7 @@ public interface GoalRepository extends JpaRepository<Goal, String> {
     List<Goal> findAllByUserId(@Param("userId") String userId);
 
     @Query(value = "SELECT g FROM Goal g WHERE ID = :goalId AND UserID = :userId ORDER BY CreatedDate DESC")
-    Goal findAllByGoalIdAndUserId(@Param("goalId") String goalId, @Param("userId") String userId);
+    Goal findByGoalIdAndUserId(@Param("goalId") String goalId, @Param("userId") String userId);
 
     @Modifying
     @Transactional

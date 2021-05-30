@@ -16,6 +16,12 @@ public interface PlaidTransactionRepository extends JpaRepository<PlaidTransacti
     @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE UserID = :userId ORDER BY Date DESC")
     List<PlaidTransaction> findAllByUserId(@Param("userId") String userId);
 
+    @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE UserID = :userId AND Date > :startDate AND " +
+            "Date <= :endDate ORDER BY Date DESC")
+    List<PlaidTransaction> findAllByUserIdInTimeRange(@Param("userId") String userId,
+                                                      @Param("startDate") Date startDate,
+                                                      @Param("endDate") Date endDate);
+
     @Query(value = "SELECT pt FROM PlaidTransaction pt WHERE AccountID = :accountId ORDER BY Date DESC")
     List<PlaidTransaction> findAllByAccountId(@Param("accountId") String accountId);
 

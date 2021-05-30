@@ -39,6 +39,31 @@ public class GoalController {
         }
     }
 
+    @GetMapping("{id}")
+    @ResponseBody
+    public GoalDTO getGoalById(@RequestHeader("Authorization") String userId,
+                               @PathVariable("id") String id) {
+        User currentUser = userRepository.findById(userId).get();
+        if (currentUser != null) {
+            return goalService.getGoalById(userId, id);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+    }
+
+    @GetMapping("types")
+    @ResponseBody
+    public List<GoalTypeDTO> getGoalTypes(@RequestHeader("Authorization") String userId) {
+        User currentUser = userRepository.findById(userId).get();
+        if (currentUser != null) {
+            return goalService.getGoalTypes();
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+    }
+
     @PutMapping("{id}")
     @ResponseBody
     public void editGoal(@RequestHeader("Authorization") String userId,
@@ -74,18 +99,6 @@ public class GoalController {
         User currentUser = userRepository.findById(userId).get();
         if (currentUser != null) {
             goalService.deleteGoal(userId, id);
-        }
-        else {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
-        }
-    }
-
-    @GetMapping("types")
-    @ResponseBody
-    public List<GoalTypeDTO> getGoalTypes(@RequestHeader("Authorization") String userId) {
-        User currentUser = userRepository.findById(userId).get();
-        if (currentUser != null) {
-            return goalService.getGoalTypes();
         }
         else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
