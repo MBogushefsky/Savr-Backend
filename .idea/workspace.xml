@@ -2,41 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e9162e3-b16a-4f83-a84a-e87cf4856e66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/configurations/shopping/ValueSerpConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/shopping/GoogleShoppingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/shopping/ProductSearchDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/shopping/ProductSearchResultDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/enums/shopping/ProductCondition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/enums/shopping/SearchSortBy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/shopping/GoogleShoppingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/user/UserSignUpService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/bank/BankAccountStatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/bank/BankAccountStatisticsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/bank/GoalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/bank/GoalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/bank/PlaidAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/bank/PlaidAccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/bank/PlaidTransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/bank/PlaidTransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/exchanges/ExchangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/exchanges/ExchangeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/SecurityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/SecurityController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/SignUpController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/UserPreferenceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/controllers/user/UserPreferenceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/bank/GoalDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/bank/GoalDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/bank/GoalTypeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/bank/GoalTypeDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/bank/PlaidAccountDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/bank/PlaidAccountDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/bank/PlaidTransactionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/bank/PlaidTransactionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/exchanges/SymbolMetadataDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/exchanges/SymbolMetadataDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/exchanges/SymbolSearchResultDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/exchanges/SymbolSearchResultDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/user/AuthorizationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/user/AuthorizationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/user/ChangePasswordDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/user/ChangePasswordDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/user/ChangeUserPreferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/user/ChangeUserPreferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/user/ProfileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/user/ProfileDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dto/user/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/dtos/user/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/models/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/models/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/bank/GoalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/bank/GoalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/bank/PlaidAccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/bank/PlaidAccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/bank/PlaidTransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/bank/PlaidTransactionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/exchanges/BinanceAlertService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/services/exchanges/BinanceAlertService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/repositories/user/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bogaware/savr/repositories/user/UserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,17 +46,17 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bogaware.savr.services.user" />
       <recent name="com.bogaware.savr.controllers.shopping" />
       <recent name="com.bogaware.savr.dtos.shopping" />
       <recent name="com.bogaware.savr.models.shopping" />
       <recent name="com.bogaware.savr.enums.shopping" />
-      <recent name="com.bogaware.savr.configurations.shopping" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
@@ -210,8 +179,8 @@
       <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state x="100" y="123" width="1240" height="631" key="DiffContextDialog/0.23.1440.832@0.23.1440.832" timestamp="1617351849149" />
-    <state width="2518" height="177" key="GridCell.Tab.0.bottom" timestamp="1623837175171">
-      <screen x="1440" y="-730" width="2560" height="1417" />
+    <state width="1398" height="165" key="GridCell.Tab.0.bottom" timestamp="1623914034632">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state width="1398" height="189" key="GridCell.Tab.0.bottom/0.23.1440.802@0.23.1440.802" timestamp="1621637189667" />
     <state width="1398" height="242" key="GridCell.Tab.0.bottom/0.23.1440.804/1440.-730.2560.1417@0.23.1440.804" timestamp="1623810098214" />
@@ -219,6 +188,7 @@
     <state width="1398" height="242" key="GridCell.Tab.0.bottom/0.23.1440.806/1440.-730.2560.1417@0.23.1440.806" timestamp="1623812703445" />
     <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.806@0.23.1440.806" timestamp="1616384084049" />
     <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1616390577834" />
+    <state width="1398" height="165" key="GridCell.Tab.0.bottom/0.23.1440.811/1440.-730.2560.1417@0.23.1440.811" timestamp="1623914034632" />
     <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1616396448948" />
     <state width="1398" height="190" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1618187814776" />
     <state width="1398" height="191" key="GridCell.Tab.0.bottom/0.23.1440.814@0.23.1440.814" timestamp="1620617443670" />
@@ -250,8 +220,8 @@
     <state width="1398" height="198" key="GridCell.Tab.0.bottom/0.23.1440.833@0.23.1440.833" timestamp="1617322814197" />
     <state width="1398" height="254" key="GridCell.Tab.0.bottom/0.23.1440.834/1440.-730.2560.1417@0.23.1440.834" timestamp="1622415137409" />
     <state width="1398" height="266" key="GridCell.Tab.0.bottom/0.23.1440.834@0.23.1440.834" timestamp="1617354049795" />
-    <state width="2518" height="177" key="GridCell.Tab.0.center" timestamp="1623837175169">
-      <screen x="1440" y="-730" width="2560" height="1417" />
+    <state width="1398" height="165" key="GridCell.Tab.0.center" timestamp="1623914034630">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state width="1398" height="189" key="GridCell.Tab.0.center/0.23.1440.802@0.23.1440.802" timestamp="1621637189666" />
     <state width="1398" height="242" key="GridCell.Tab.0.center/0.23.1440.804/1440.-730.2560.1417@0.23.1440.804" timestamp="1623810098212" />
@@ -259,6 +229,7 @@
     <state width="1398" height="242" key="GridCell.Tab.0.center/0.23.1440.806/1440.-730.2560.1417@0.23.1440.806" timestamp="1623812703444" />
     <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.806@0.23.1440.806" timestamp="1616384084048" />
     <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1616390577833" />
+    <state width="1398" height="165" key="GridCell.Tab.0.center/0.23.1440.811/1440.-730.2560.1417@0.23.1440.811" timestamp="1623914034630" />
     <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1616396448947" />
     <state width="1398" height="190" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1618187814775" />
     <state width="1398" height="191" key="GridCell.Tab.0.center/0.23.1440.814@0.23.1440.814" timestamp="1620617443670" />
@@ -290,8 +261,8 @@
     <state width="1398" height="198" key="GridCell.Tab.0.center/0.23.1440.833@0.23.1440.833" timestamp="1617322814196" />
     <state width="1398" height="254" key="GridCell.Tab.0.center/0.23.1440.834/1440.-730.2560.1417@0.23.1440.834" timestamp="1622415137407" />
     <state width="1398" height="266" key="GridCell.Tab.0.center/0.23.1440.834@0.23.1440.834" timestamp="1617354049794" />
-    <state width="2518" height="177" key="GridCell.Tab.0.left" timestamp="1623837175168">
-      <screen x="1440" y="-730" width="2560" height="1417" />
+    <state width="1398" height="165" key="GridCell.Tab.0.left" timestamp="1623914034628">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state width="1398" height="189" key="GridCell.Tab.0.left/0.23.1440.802@0.23.1440.802" timestamp="1621637189666" />
     <state width="1398" height="242" key="GridCell.Tab.0.left/0.23.1440.804/1440.-730.2560.1417@0.23.1440.804" timestamp="1623810098212" />
@@ -299,6 +270,7 @@
     <state width="1398" height="242" key="GridCell.Tab.0.left/0.23.1440.806/1440.-730.2560.1417@0.23.1440.806" timestamp="1623812703443" />
     <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.806@0.23.1440.806" timestamp="1616384084048" />
     <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1616390577833" />
+    <state width="1398" height="165" key="GridCell.Tab.0.left/0.23.1440.811/1440.-730.2560.1417@0.23.1440.811" timestamp="1623914034628" />
     <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1616396448946" />
     <state width="1398" height="190" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1618187814774" />
     <state width="1398" height="191" key="GridCell.Tab.0.left/0.23.1440.814@0.23.1440.814" timestamp="1620617443669" />
@@ -330,8 +302,8 @@
     <state width="1398" height="198" key="GridCell.Tab.0.left/0.23.1440.833@0.23.1440.833" timestamp="1617322814195" />
     <state width="1398" height="254" key="GridCell.Tab.0.left/0.23.1440.834/1440.-730.2560.1417@0.23.1440.834" timestamp="1622415137406" />
     <state width="1398" height="266" key="GridCell.Tab.0.left/0.23.1440.834@0.23.1440.834" timestamp="1617354049794" />
-    <state width="2518" height="177" key="GridCell.Tab.0.right" timestamp="1623837175169">
-      <screen x="1440" y="-730" width="2560" height="1417" />
+    <state width="1398" height="165" key="GridCell.Tab.0.right" timestamp="1623914034631">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state width="1398" height="189" key="GridCell.Tab.0.right/0.23.1440.802@0.23.1440.802" timestamp="1621637189666" />
     <state width="1398" height="242" key="GridCell.Tab.0.right/0.23.1440.804/1440.-730.2560.1417@0.23.1440.804" timestamp="1623810098213" />
@@ -339,6 +311,7 @@
     <state width="1398" height="242" key="GridCell.Tab.0.right/0.23.1440.806/1440.-730.2560.1417@0.23.1440.806" timestamp="1623812703445" />
     <state width="1398" height="198" key="GridCell.Tab.0.right/0.23.1440.806@0.23.1440.806" timestamp="1616384084049" />
     <state width="1398" height="198" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1616390577833" />
+    <state width="1398" height="165" key="GridCell.Tab.0.right/0.23.1440.811/1440.-730.2560.1417@0.23.1440.811" timestamp="1623914034631" />
     <state width="1398" height="198" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1616396448947" />
     <state width="1398" height="190" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1618187814776" />
     <state width="1398" height="191" key="GridCell.Tab.0.right/0.23.1440.814@0.23.1440.814" timestamp="1620617443670" />
