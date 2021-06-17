@@ -1,9 +1,9 @@
 package com.bogaware.savr.services.bank;
 
-import com.bogaware.savr.dto.bank.GoalDTO;
-import com.bogaware.savr.dto.bank.GoalTypeDTO;
-import com.bogaware.savr.dto.bank.PlaidAccountDTO;
-import com.bogaware.savr.dto.bank.PlaidTransactionDTO;
+import com.bogaware.savr.dtos.bank.GoalDTO;
+import com.bogaware.savr.dtos.bank.GoalTypeDTO;
+import com.bogaware.savr.dtos.bank.PlaidAccountDTO;
+import com.bogaware.savr.dtos.bank.PlaidTransactionDTO;
 import com.bogaware.savr.models.bank.Goal;
 import com.bogaware.savr.models.bank.GoalType;
 import com.bogaware.savr.models.bank.GoalValue;

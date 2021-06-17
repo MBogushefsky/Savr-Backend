@@ -1,6 +1,6 @@
 package com.bogaware.savr.controllers.bank;
 
-import com.bogaware.savr.dto.bank.PlaidTransactionDTO;
+import com.bogaware.savr.dtos.bank.PlaidTransactionDTO;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.repositories.bank.PlaidTokenRepository;
 import com.bogaware.savr.repositories.bank.PlaidTransactionRepository;

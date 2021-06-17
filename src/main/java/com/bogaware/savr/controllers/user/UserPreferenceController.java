@@ -1,6 +1,6 @@
 package com.bogaware.savr.controllers.user;
 
-import com.bogaware.savr.dto.user.ChangeUserPreferenceDTO;
+import com.bogaware.savr.dtos.user.ChangeUserPreferenceDTO;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.models.user.UserPreference;
 import com.bogaware.savr.models.user.UserPreferenceType;

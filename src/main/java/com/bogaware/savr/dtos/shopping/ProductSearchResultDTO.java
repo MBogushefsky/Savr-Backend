@@ -1,4 +1,4 @@
-package com.bogaware.savr.dto.user;
+package com.bogaware.savr.dtos.shopping;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -7,29 +7,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-
 @Getter
 @Setter
 @JsonSerialize
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class ProductSearchResultDTO {
     @JsonProperty
-    private String Id;
+    private String id;
     @JsonProperty
-    private String username;
+    private String title;
     @JsonProperty
-    private String passwordHash;
+    private String smallDescription;
     @JsonProperty
-    private String firstName;
+    private String link;
     @JsonProperty
-    private String lastName;
+    private double rating;
     @JsonProperty
-    private String email;
+    private String imageSrc;
     @JsonProperty
-    private String phoneNumber;
+    private String merchant;
     @JsonProperty
-    private String profileImage;
+    private double price;
 }

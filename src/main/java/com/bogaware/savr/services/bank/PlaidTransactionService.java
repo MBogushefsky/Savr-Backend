@@ -1,6 +1,6 @@
 package com.bogaware.savr.services.bank;
 
-import com.bogaware.savr.dto.bank.PlaidTransactionDTO;
+import com.bogaware.savr.dtos.bank.PlaidTransactionDTO;
 import com.bogaware.savr.models.bank.PlaidTransaction;
 import com.bogaware.savr.repositories.bank.PlaidTokenRepository;
 import com.bogaware.savr.repositories.bank.PlaidTransactionRepository;
@@ -8,7 +8,6 @@ import com.bogaware.savr.repositories.user.UserRepository;
 import com.bogaware.savr.services.user.TwilioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.Date;

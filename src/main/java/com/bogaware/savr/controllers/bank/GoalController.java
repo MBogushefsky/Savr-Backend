@@ -1,8 +1,7 @@
 package com.bogaware.savr.controllers.bank;
 
-import com.bogaware.savr.dto.bank.GoalDTO;
-import com.bogaware.savr.dto.bank.GoalTypeDTO;
-import com.bogaware.savr.models.bank.GoalType;
+import com.bogaware.savr.dtos.bank.GoalDTO;
+import com.bogaware.savr.dtos.bank.GoalTypeDTO;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.repositories.user.UserRepository;
 import com.bogaware.savr.services.bank.GoalService;

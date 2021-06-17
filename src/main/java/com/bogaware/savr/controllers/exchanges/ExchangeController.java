@@ -1,6 +1,6 @@
 package com.bogaware.savr.controllers.exchanges;
 
-import com.bogaware.savr.dto.exchanges.SymbolSearchResultDTO;
+import com.bogaware.savr.dtos.exchanges.SymbolSearchResultDTO;
 import com.bogaware.savr.services.exchanges.BinanceService;
 import com.bogaware.savr.services.exchanges.MarketStackService;
 import com.fasterxml.jackson.databind.JsonNode;

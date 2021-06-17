@@ -1,6 +1,6 @@
 package com.bogaware.savr.controllers.bank;
 
-import com.bogaware.savr.dto.bank.PlaidAccountDTO;
+import com.bogaware.savr.dtos.bank.PlaidAccountDTO;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.repositories.user.UserRepository;
 import com.bogaware.savr.services.bank.PlaidAccountService;
