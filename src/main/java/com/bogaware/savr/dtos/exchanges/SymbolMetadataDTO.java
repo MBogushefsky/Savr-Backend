@@ -1,22 +1,20 @@
-package com.bogaware.savr.dto.bank;
+package com.bogaware.savr.dtos.exchanges;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.HashMap;
 
 @Getter
 @Setter
 @JsonSerialize
 @AllArgsConstructor
-@NoArgsConstructor
-public class GoalTypeDTO {
+public class SymbolMetadataDTO {
     @JsonProperty
-    private String Id;
+    private final String name;
     @JsonProperty
-    private String name;
+    private final String symbol;
+    @JsonProperty
+    private final boolean isStock;
 }

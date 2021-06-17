@@ -1,15 +1,8 @@
 package com.bogaware.savr.services.bank;
 
-import com.bogaware.savr.dto.bank.GoalDTO;
-import com.bogaware.savr.dto.bank.GoalTypeDTO;
-import com.bogaware.savr.dto.bank.PlaidAccountDTO;
-import com.bogaware.savr.dto.bank.PlaidTransactionDTO;
+import com.bogaware.savr.dtos.bank.PlaidAccountDTO;
 import com.bogaware.savr.models.bank.*;
-import com.bogaware.savr.repositories.bank.GoalRepository;
-import com.bogaware.savr.repositories.bank.GoalTypeRepository;
-import com.bogaware.savr.repositories.bank.GoalValueRepository;
 import com.bogaware.savr.repositories.bank.PlaidAccountRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

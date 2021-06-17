@@ -36,7 +36,7 @@ public class BinanceAlertService {
     }
 
     @Async
-    @Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
+    //@Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
     public void alertOfSignificantPriceChangeOfPortfolio() throws UnsupportedEncodingException {
         System.out.println("Checking for Cryptocurrency Significant Change...");
         List<BinanceBalance> binanceBalances = binanceService.getAccountBalances();

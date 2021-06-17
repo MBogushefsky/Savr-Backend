@@ -1,7 +1,7 @@
 package com.bogaware.savr.controllers.user;
 
-import com.bogaware.savr.dto.user.ProfileDTO;
-import com.bogaware.savr.dto.user.UserDTO;
+import com.bogaware.savr.dtos.user.ProfileDTO;
+import com.bogaware.savr.dtos.user.UserDTO;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.repositories.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

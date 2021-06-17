@@ -1,4 +1,4 @@
-package com.bogaware.savr.dto.user;
+package com.bogaware.savr.dtos.exchanges;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -10,7 +10,11 @@ import lombok.Setter;
 @Setter
 @JsonSerialize
 @AllArgsConstructor
-public class AuthorizationDTO {
+public class SymbolSearchResultDTO {
     @JsonProperty
-    private final String token;
+    private final String name;
+    @JsonProperty
+    private final String symbol;
+    @JsonProperty
+    private final boolean isStock;
 }

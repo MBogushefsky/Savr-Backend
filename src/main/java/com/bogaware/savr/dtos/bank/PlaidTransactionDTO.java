@@ -1,4 +1,4 @@
-package com.bogaware.savr.dto.bank;
+package com.bogaware.savr.dtos.bank;
 
 import com.bogaware.savr.models.bank.PlaidTransaction;
 import com.fasterxml.jackson.annotation.JsonIgnore;

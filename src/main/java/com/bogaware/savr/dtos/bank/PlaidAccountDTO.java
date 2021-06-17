@@ -1,4 +1,4 @@
-package com.bogaware.savr.dto.user;
+package com.bogaware.savr.dtos.bank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -7,20 +7,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Time;
-
 @Getter
 @Setter
 @JsonSerialize
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChangeUserPreferenceDTO {
+public class PlaidAccountDTO {
     @JsonProperty
-    private String typeId;
+    private String Id;
     @JsonProperty
     private String userId;
     @JsonProperty
-    private Time preferredTime;
+    private String accountId;
     @JsonProperty
-    private String value;
+    private String institutionId;
+    @JsonProperty
+    private String name;
+    @JsonProperty
+    private String type;
+    @JsonProperty
+    private String subType;
+    @JsonProperty
+    private double availableBalance;
+    @JsonProperty
+    private double currentBalance;
+
 }

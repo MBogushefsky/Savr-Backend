@@ -1,6 +1,6 @@
 package com.bogaware.savr.controllers.user;
 
-import com.bogaware.savr.dto.user.ChangePasswordDTO;
+import com.bogaware.savr.dtos.user.ChangePasswordDTO;
 import com.bogaware.savr.models.user.User;
 import com.bogaware.savr.repositories.user.UserRepository;
 import com.bogaware.savr.services.user.SecurityService;

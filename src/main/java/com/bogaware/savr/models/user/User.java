@@ -1,6 +1,6 @@
 package com.bogaware.savr.models.user;
 
-import com.bogaware.savr.dto.user.UserDTO;
+import com.bogaware.savr.dtos.user.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
