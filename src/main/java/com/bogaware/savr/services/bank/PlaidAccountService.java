@@ -44,11 +44,11 @@ public class PlaidAccountService {
 
     public List<PlaidAccountDTO> convertAccountsToDTOs(List<PlaidAccount> accounts) {
         return accounts.stream()
-                .map(account -> {
-                    return new PlaidAccountDTO(account.getId(), account.getUserId(),
+                .map(account ->
+                    new PlaidAccountDTO(account.getId(), account.getUserId(),
                             account.getAccountId(), account.getInstitutionId(),
                             account.getName(), account.getType(), account.getSubType(),
-                            account.getAvailableBalance(), account.getCurrentBalance());
-                }).collect(Collectors.toList());
+                            account.getAvailableBalance(), account.getCurrentBalance())
+                ).collect(Collectors.toList());
     }
 }

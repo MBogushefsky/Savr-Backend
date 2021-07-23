@@ -23,7 +23,18 @@ public class PlaidTokenController {
     @Autowired
     PlaidTokenRepository plaidTokenRepository;
 
-    @PostMapping("")
+    @GetMapping("link/create")
+    @ResponseBody
+    public String getLinkToken(@RequestHeader("Authorization") String userId) {
+        if (userAuthorizationService.hasAccess(userId)) {
+            return plaidService.getLinkToken(userId);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+    }
+
+    @PostMapping("link")
     @ResponseBody
     public void savePlaidToken(@RequestHeader("Authorization") String userId, @RequestParam(name = "token") String token) {
         if (userAuthorizationService.hasAccess(userId)) {

@@ -32,7 +32,7 @@ public class PlaidAccountSyncService {
     }
 
     @Async
-    //@Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
+    @Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
     @Transactional
     public void syncAll() {
         System.out.println("Syncing All Accounts...");

@@ -42,7 +42,7 @@ public class PlaidTransactionController {
     @GetMapping("")
     @ResponseBody
     public List<PlaidTransactionDTO> getTransactions(@RequestHeader("Authorization") String userId,
-                                                     @RequestParam("accountIds") List<String> accountIds,
+                                                     @RequestParam("account-ids") List<String> accountIds,
                                                      @RequestParam("query") String query,
                                                      @RequestParam(value = "start-date", required = false)
                                                                              Date startDate,
@@ -65,7 +65,7 @@ public class PlaidTransactionController {
     @GetMapping("ungrouped")
     @ResponseBody
     public List<PlaidTransactionDTO> getTransactionsByAccountIdsInTimeRangeUngrouped(@RequestHeader("Authorization") String userId,
-                                                                                    @RequestParam("accountIds") List<String> accountIds,
+                                                                                    @RequestParam("account-ids") List<String> accountIds,
                                                                                      @RequestParam(value = "start-date", required = false)
                                                                                                           Date startDate,
                                                                                      @RequestParam(value = "end-date", required = false)
@@ -83,7 +83,7 @@ public class PlaidTransactionController {
     @GetMapping("grouped")
     @ResponseBody
     public ArrayList<ArrayList<PlaidTransactionDTO>> getTransactionsByAccountIdsInTimeRangeGrouped(@RequestHeader("Authorization") String userId,
-                                                                                                  @RequestParam("accountIds") List<String> accountIds,
+                                                                                                  @RequestParam("account-ids") List<String> accountIds,
                                                                                                   @RequestParam(value = "start-date", required = false)
                                                                                                           Date startDate,
                                                                                                   @RequestParam(value = "end-date", required = false)
@@ -98,10 +98,60 @@ public class PlaidTransactionController {
         }
     }
 
+    @GetMapping("grouped/past-week")
+    @ResponseBody
+    public ArrayList<ArrayList<PlaidTransactionDTO>> getTransactionsByAccountIdsInTimeRangeGroupedForPastWeek(@RequestHeader("Authorization") String userId,
+                                                                                                              @RequestParam("account-ids") List<String> accountIds) {
+        User currentUser = userRepository.findById(userId).get();
+        if (currentUser != null) {
+            Calendar calendar = Calendar.getInstance();
+            Date endDate = new Date(calendar.getTimeInMillis());
+            calendar.add(Calendar.DATE, -7);
+            Date startDate = new Date(calendar.getTimeInMillis());
+            ArrayList<ArrayList<PlaidTransactionDTO>> groupedTransactions = plaidTransactionService.findAllByAccountIdInTimeRangeGrouped(accountIds, startDate, endDate);
+            return groupedTransactions;
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+    }
+
+    @GetMapping("grouped/past-month")
+    @ResponseBody
+    public ArrayList<ArrayList<PlaidTransactionDTO>> getTransactionsByAccountIdsInTimeRangeGroupedForPastMonth(@RequestHeader("Authorization") String userId,
+                                                                                                               @RequestParam("account-ids") List<String> accountIds) {
+        User currentUser = userRepository.findById(userId).get();
+        if (currentUser != null) {
+            Calendar calendar = Calendar.getInstance();
+            Date endDate = new Date(calendar.getTimeInMillis());
+            calendar.add(Calendar.MONTH, -1);
+            Date startDate = new Date(calendar.getTimeInMillis());
+            ArrayList<ArrayList<PlaidTransactionDTO>> groupedTransactions = plaidTransactionService.findAllByAccountIdInTimeRangeGrouped(accountIds, startDate, endDate);
+            return groupedTransactions;
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+    }
+
+    @GetMapping("grouped/all")
+    @ResponseBody
+    public ArrayList<ArrayList<PlaidTransactionDTO>> getTransactionsByAccountIdsInTimeRangeGroupedForAll(@RequestHeader("Authorization") String userId,
+                                                                                                         @RequestParam("account-ids") List<String> accountIds) {
+        User currentUser = userRepository.findById(userId).get();
+        if (currentUser != null) {
+            ArrayList<ArrayList<PlaidTransactionDTO>> groupedTransactions = plaidTransactionService.findAllByAccountIdInTimeRangeGrouped(accountIds, null, null);
+            return groupedTransactions;
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+    }
+
     @GetMapping("categories")
     @ResponseBody
     public ObjectNode getCategoriesWithNetAmount(@RequestHeader("Authorization") String userId,
-                                                 @RequestParam("accountIds") List<String> accountIds,
+                                                 @RequestParam("account-ids") List<String> accountIds,
                                                  @RequestParam(value = "start-date", required = false) Date startDate,
                                                  @RequestParam(value = "end-date", required = false) Date endDate) {
         User currentUser = userRepository.findById(userId).get();
