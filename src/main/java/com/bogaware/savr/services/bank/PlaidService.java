@@ -2,18 +2,13 @@ package com.bogaware.savr.services.bank;
 
 import com.bogaware.savr.configurations.bank.PlaidConfiguration;
 import com.plaid.client.PlaidClient;
-import com.plaid.client.request.AccountsBalanceGetRequest;
-import com.plaid.client.request.AccountsGetRequest;
-import com.plaid.client.request.ItemPublicTokenExchangeRequest;
-import com.plaid.client.request.TransactionsGetRequest;
-import com.plaid.client.response.AccountsBalanceGetResponse;
-import com.plaid.client.response.AccountsGetResponse;
-import com.plaid.client.response.ItemPublicTokenExchangeResponse;
-import com.plaid.client.response.TransactionsGetResponse;
+import com.plaid.client.request.*;
+import com.plaid.client.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,6 +25,23 @@ public class PlaidService {
                 .clientIdAndSecret(plaidConfiguration.getClientId(), plaidConfiguration.getSecret())
                 .developmentBaseUrl()
                 .build();
+    }
+
+    public String getLinkToken(String userId) {
+        try {
+            Response<LinkTokenCreateResponse> response = plaidClient.service()
+                    .linkTokenCreate(new LinkTokenCreateRequest(new LinkTokenCreateRequest.User(userId), "Frugal", Arrays.asList("auth", "transactions"), Arrays.asList("US"), "en")).execute();
+            if (response.isSuccessful()) {
+                return response.body().getLinkToken();
+            }
+            else {
+                System.out.println(response.errorBody().string());
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getAccessToken(String publicToken) {

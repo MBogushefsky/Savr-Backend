@@ -45,7 +45,7 @@ public class PlaidTransactionSyncService {
     }
 
     @Async
-    //@Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
+    @Scheduled(cron = "${alert.frequentCron}", zone = "UTC") // Every 15 minutes during working hours
     @Transactional
     protected void syncAll() throws Exception {
         System.out.println("Syncing All Transactions...");
