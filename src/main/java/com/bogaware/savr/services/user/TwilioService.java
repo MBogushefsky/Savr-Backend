@@ -91,12 +91,12 @@ public class TwilioService {
                 "&FromCity=QUEEN+CREEK" +
                 "&Body=Test1" +
                 "&FromCountry=US" +
-                "&To=%2BTWILIO_FROM_NUMBER_REMOVED" +
+                "&To=%2B" + System.getenv("TWILIO_TO_NUMBER") +
                 "&ToZip=63873" +
                 "&NumSegments=1" +
                 "&MessageSid=SM82cb2c0de08ca4357cad0b8fadb37879" +
                 "&AccountSid=PLACEHOLDER_REMOVED" +
-                "&From=%2BTWILIO_TO_NUMBER_REMOVED" +
+                "&From=%2B" + System.getenv("TWILIO_FROM_NUMBER") +
                 "&ApiVersion=2010-04-01";*/
         String urlDecodedReceivedMessageParameters = URLDecoder.decode(receivedMessageParameters, "UTF-8");
         String[] parts = urlDecodedReceivedMessageParameters.split("&");

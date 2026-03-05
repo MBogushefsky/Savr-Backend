@@ -56,7 +56,7 @@ public class BinanceAlertService {
             }
         }
         if (resultMessage.length() != 0) {
-            twilioService.sendMessage(twilioService.twilioMessageBuilder("TWILIO_TO_NUMBER_REMOVED", resultMessage));
+            twilioService.sendMessage(twilioService.twilioMessageBuilder(System.getenv("TWILIO_TO_NUMBER"), resultMessage));
         }
         System.out.println("Cryptocurrency Significant Change Checked");
     }
